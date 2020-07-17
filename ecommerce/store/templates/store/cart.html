@@ -1,0 +1,122 @@
+{% extends "store/main.html" %}
+{% load static %}
+{% block js %}
+<script type="text/javascript" src="{% static "js/cart.js" %}"></script>
+{% endblock js %}
+
+{% block kaka %}
+<li class="nav-item ml-3 badge badge-warning">
+carrito: <span id="carrito">{{carrito}}</span></li>
+{% endblock kaka %}
+
+
+
+{% comment %} 
+
+<h3>Cart</h3>
+<ul>
+ {% for item in data %}
+<li >{{item.product}}//<span class="price-{{item.id}}">{{item.get_total}}<span></li>
+
+
+<button class="mas" data-product="{{item.id}}">+</button>
+<span class="item-{{item.id}}">{{item.quantity}}</span>
+<button class="menos" data-product="{{item.id}}">-</button>
+<br/><br/>
+{% endfor %} 
+</ul>
+<br/><br/>
+<h1>Item Amount: <span id="total_amount">{{data2.get_total_cartQ}}</span></h1>
+<h1>Total Cost: <span id="total_price">{{data2.get_total_cartP}}</span></h1> {% endcomment %}
+{% block content %}
+
+
+
+<div class="container cart-container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 item-container" >
+            <table class="table table-hover">
+                <thead>
+                    <tr class="d-flex table-primary border border-primary">
+                        <th class="col-sm-4 col-md-6 pr-sm-1">Product</th>
+                        <th class="col-sm-2 col-md-2 text-right">Quantity (uds)</th>
+                        <th class="col-sm-2 col-md-2 text-right">Price</th>
+                        <th class="col-sm-2 col-md-2 text-right">Total</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                    <tr class="d-flex border">
+                        <td class="col-sm-4 col-md-6 pr-sm-1">
+                        <div class="media">
+                        <div class="media-body">
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{item.product.ImageUrl}}" > </a>
+                            
+                                <h5 class=""><a href="#">{{item.product}}</a></h5>
+                                
+                            </div>
+                        </div></td>
+                        <td class="col-sm-2 col-md-2 text-right td-cantidad">
+                        <div class="row">
+                        <div class="col d-flex flex-column align-items-end">
+                       <span >
+                        <svg width="20" class="svg-cart" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="mas" data-product="{{item.id}}" d="M9 9V15H6V9H0V6H6V0H9V6H15V9H9Z" fill="black"/>
+                        </svg>
+                        </span> 
+
+                        <span class="form-control my-2 item-{{item.id}} w-auto" >{{item.quantity}}</span>
+                       <span >
+                        <svg width="20" class="svg-cart" height="4" viewBox="0 0 15 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line y1="1.5" x2="15" y2="1.5" stroke="black" stroke-width="3" class="menos" data-product="{{item.id}}"/>
+                        </svg>
+                        </span> 
+                        </div>
+                        </div>
+                        </td>
+                        <td class="col-sm-2 col-md-2 text-right ">
+                        {{item.product.price}} €</td>
+                        <td class="col-sm-2 col-md-2 text-right price-{{item.id}} font-weight-bold">{{item.get_total}} €</td>
+                        
+                        
+                    </tr>
+                   {% endfor %}
+                </tbody>
+                
+            </table>
+            <table class="table table-hover">
+            
+                    <tr class="d-flex" >
+                        <td class="col-6 "></td>
+                        <td class="col-3 table-info borr"><h5 class="mb-0">Total Items<br></h5></td>
+                        <td class="col-3 text-right table-warning borr"><h5 id="total_amount" class="mb-0">{{data2.get_total_cartQ}} uds</h5></td>
+                    </tr>
+                    <tr class="d-flex">
+                       <td class="col-6"></td>
+                        <td class="col-3 table-info borr"><h5 class="mb-0 "><span class="badge badge-primary">Total</span></h5></td>
+                        <td class="text-right col-3 table-warning borr"><h5 id="total_price" class="mb-0">{{data2.get_total_cartP}}€</h5></td>
+                    </tr>
+                    <tr class="d-flex">
+                        <td class="col-6"></td>
+                        <td class="col-3 ">
+                        <a class="btn btn-outline-success text-left" href="{% url "store" %}">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                        </a></td>
+                        <td class="col-3">
+                        <a class="btn btn-success text-right" href="{% url "checkout" %}">
+                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        </a></td>
+                    </tr>
+               
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<br/><br/>
+{% comment %} <label>Name <input type="text" name="name" /></label> {% endcomment %}
+
+

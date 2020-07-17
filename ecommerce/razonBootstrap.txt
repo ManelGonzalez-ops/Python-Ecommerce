@@ -1,0 +1,8 @@
+1r.
+Ponemos cuantas columnas queremos que cada celda en pantalla grande, en este caso 3. => col-md-3 => ponemos el md porque queremos que colapsen cuando el viewport sea menor a 800px.
+
+2n.
+Como hemos definido col-sm-6, mientras el viewport esté entre 800px (md) y 500px(sm), cada celda en vez de colpasar compeltamente pasará a ocupar 6columnas, formando filas de 2 columnas
+
+3r. Finalmente cuando el viewport es 500px o inferior, como no tenemos definido la classe de bootstrap col-xs-6, las celdas colapasarn completamente formando filas de una columna, si hubiesemos añadido utilizado col-xs-6 pasaríamos a tener filas de dos columnas. (pero esta vez por debajo de 500px)
+
