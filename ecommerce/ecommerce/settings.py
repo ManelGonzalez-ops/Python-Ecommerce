@@ -29,7 +29,7 @@ SECRET_KEY = '!hq73-$%&7m*56h@%co9)$%$e8a@7z@l8ho4*hvz@1pq4y^cev'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['localhost:5432', '127.0.0.1','localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
