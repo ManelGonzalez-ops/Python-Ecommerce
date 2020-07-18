@@ -224,18 +224,21 @@ def processOrder(request):
         costumer = request.user.costumer
         order = Order.objects.get(costumer=costumer, complete=False)
         total_cost = order.get_total_cartP
-        try:
-            shippingInfo = ShippingAddress.objects.get(costumer=costumer, order=order)
+        if body["needsShipping"]:
+            try:
+                shippingInfo = ShippingAddress.objects.get(costumer=costumer, order=order)
 
-            shippingInfo.address = body["datosShipping"]["address"]
-            shippingInfo.city = body["datosShipping"]["city"]
-            shippingInfo.state = body["datosShipping"]["state"]
-            shippingInfo.zipcode = body["datosShipping"]["zip"]
-            shippingInfo.save()
+                shippingInfo.address = body["datosShipping"]["address"] 
+                shippingInfo.city = body["datosShipping"]["city"]
+                shippingInfo.state = body["datosShipping"]["state"]
+                shippingInfo.zipcode = body["datosShipping"]["zip"]
+                shippingInfo.save()
 
-        except ShippingAddress.DoesNotExist:
-            shippingInfo = ShippingAddress(costumer=costumer, order=order, address=body["datosShipping"]["address"], city=body["datosShipping"]["city"], state=body["datosShipping"]["state"], zipcode=body["datosShipping"]["zip"])
-            shippingInfo.save()
+            except ShippingAddress.DoesNotExist:
+                shippingInfo = ShippingAddress(costumer=costumer, order=order, address=body["datosShipping"]["address"], city=body["datosShipping"]["city"], state=body["datosShipping"]["state"], zipcode=body["datosShipping"]["zip"])
+                shippingInfo.save()
+            
+            return JsonResponse(total_cost, safe=False)
     else:
         newCostumer, created = Costumer.objects.get_or_create(name=body["datosShipping"]["nombre"],email=body["datosShipping"]["email"], isguest=True)    
         newCostumer.save()    

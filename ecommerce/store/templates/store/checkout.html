@@ -108,119 +108,247 @@
 
 
 
+{% comment %} 
+  <div class="container">
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3 sticky-top">
+                    {% for product in data1 %}
+
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">{{product.name}}</h6>
+                        </div>
+                        <span class="text-muted">{{product.total}}</span>
+                    </li>
+                    {% endfor %}
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>{{data2.get_total_cartP}}</strong>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+            {% if data2.needsShipping %}
+
+            <form class="needs-validation">
+                <div class="col-md-8 order-md-1">
+                    {% if not autenticado %}
+
+                    <div class="row">
+                        <div class="col-12 mb-2">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" placeholder="" required="true" id="name_costumer">
+                            <div class="invalid-feedback"> Name is required </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email mb-0">Email </label>
+                            <input type="email" class="form-control" id="email_costumer" placeholder="you@example.com">
+                            <div class="invalid-feedback"> Please enter a valid email </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <h4 class="mb-3">Billing address</h4>
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="inputAddress2"
+                            placeholder="Apartment, studio, or floor" value="{{shipping_info.address}}" required="true">
+                        <div class="invalid-feedback"> Please enter your shipping address. </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="country">City</label>
+                            <input type="text" class="form-control" id="inputCity" value="{{shipping_info.city}}"
+                                required="true">
+                            <div class="invalid-feedback"> Please select a valid country. </div>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="inputState" placeholder="country"
+                                value="{{shipping_info.state}}" required="true">
+                            <div class="invalid-feedback"> Please select a valid country. </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" placeholder="" required="true" id="inputZip"
+                                value="{{shipping_info.zipcode}}">
+                            <div class="invalid-feedback"> Zip code required. </div>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Payment</h4>
+                    <hr class="mb-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago"
+                        data-shipping="si">Continuar</button>
+                    <div id="paypal-button-container"></div>
+            </form>
+            {% else %}
+
+            {% if not autenticado %}
+
+            <form class="needs-validation">
+                <div class="col-md-6 mb-2">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="name_costumer" placeholder="your name" required="true">
+                    <div class="invalid-feedback"> A name is required. </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email mb-0">Email </label>
+                    <input type="email" class="form-control" required="true" placeholder="you@example.com"
+                        id="email_costumer">
+                    <div class="invalid-feedback"> Please enter a valid email. </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago"
+                        data-shipping="no">Continuar</button>
+                    <div id="paypal-button-container"></div>
+                </div>
+            </form>
+            {% else %}
+
+            <form class="needs-validation">
+                <div class="col-md-6 mb-2">
+                    <div id="paypal-button-container"></div>
+                </div>
+            </form>
+            {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+ {% endcomment %}
 
 
 
 
 <div class="container">
-   
-    <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your cart</span>
-                <span class="badge badge-secondary badge-pill">3</span>
-            </h4>
-            <ul class="list-group mb-3 sticky-top">
-            {% for product in data1 %}
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">{{product.name}}</h6>
-                       
-                    </div>
-                    <span class="text-muted">{{product.total}}</span>
-                </li>
-                {% endfor %}
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>{{data2.get_total_cartP}}</strong>
-                </li>
-            </ul>
-            
-        </div>
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3 sticky-top">
+                    {% for product in data1 %}
 
-        
-            
-            
-        {% if data2.needsShipping %}
-        <form class="needs-validation">
-               <div class="col-md-8 order-md-1">
-               {% if not autenticado %}
-                <div class="row">
-                <div class="col-md-6 mb-2">
-                        <label for="firstName">First name</label>
-                        <input type="text" class="form-control" placeholder="" required="true" id="name_costumer">
-                        <div class="invalid-feedback"> Name is required </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                    <label for="email mb-0">Email </label>
-                    <input type="email" class="form-control" id="email_costumer" placeholder="you@example.com">
-                    <div class="invalid-feedback"> Please enter a valid email </div>
-                </div>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">{{product.name}}</h6>
+                        </div>
+                        <span class="text-muted">{{product.total}}</span>
+                    </li>
+                    {% endfor %}
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>{{data2.get_total_cartP}}</strong>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+            {% if data2.needsShipping %}
+
+            <form class="needs-validation">
+                <div class="col-md-8 order-md-1">
+                    {% if not autenticado %}
+
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" placeholder="" required="true" id="name_costumer">
+                            <div class="invalid-feedback"> Name is required </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email mb-0">Email </label>
+                            <input type="email" class="form-control" id="email_costumer" placeholder="you@example.com">
+                            <div class="invalid-feedback"> Please enter a valid email </div>
+                        </div>
                     </div>
                     {% endif %}
-                <h4 class="mb-3">Billing address</h4>
-                
-                <div class="mb-3">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="inputAddress2"  placeholder="Apartment, studio, or floor" value="{{shipping_info.address}}" required="true">
-                    <div class="invalid-feedback"> Please enter your shipping address. </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-5 mb-3">
-                        <label for="country">City</label>
-                        <input type="text" class="form-control" id="inputCity"
-                        value="{{shipping_info.city}}" required="true">
-                        <div class="invalid-feedback"> Please select a valid country. </div>
+
+                    <h4 class="mb-3">Billing address</h4>
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="inputAddress2"
+                            placeholder="Apartment, studio, or floor" value="{{shipping_info.address}}" required="true">
+                        <div class="invalid-feedback"> Please enter your shipping address. </div>
                     </div>
-                    <div class="col-md-5 mb-3">
-                        <label for="country">Country</label>
-                        <input type="text" class="form-control" id="inputState" placeholder="country" value="{{shipping_info.state}}" required="true">
-                        <div class="invalid-feedback"> Please select a valid country. </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="country">City</label>
+                            <input type="text" class="form-control" id="inputCity" value="{{shipping_info.city}}"
+                                required="true">
+                            <div class="invalid-feedback"> Please select a valid country. </div>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="inputState" placeholder="country"
+                                value="{{shipping_info.state}}" required="true">
+                            <div class="invalid-feedback"> Please select a valid country. </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" placeholder="" required="true" id="inputZip"
+                                value="{{shipping_info.zipcode}}">
+                            <div class="invalid-feedback"> Zip code required. </div>
+                        </div>
                     </div>
-                    
-                    <div class="col-md-3 mb-3">
-                        <label for="zip">Zip</label>
-                        <input type="text" class="form-control" placeholder="" required="true" id="inputZip" value="{{shipping_info.zipcode}}">
-                        <div class="invalid-feedback"> Zip code required. </div>
-                    </div>
-                </div>
-                <hr class="mb-4">
-                <h4 class="mb-3">Payment</h4>
-                <hr class="mb-4">
-                
-                <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago" data-shipping="si">Continuar</button>
-                  <div id="paypal-button-container"></div>
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Payment</h4>
+                    <hr class="mb-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago"
+                        data-shipping="si">Continuar</button>
+                    <div id="paypal-button-container"></div>
             </form>
             {% else %}
-            
-            {% if not autenticado %}  
+
+            {% if not autenticado %}
+
+            <form class="needs-validation col-md-8 order-md-1">
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" id="name_costumer" placeholder="your name"
+                                required="true">
+                            <div class="invalid-feedback"> A name is required. </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="email mb-0">Email </label>
+                            <input type="email" class="form-control" required="true" placeholder="you@example.com"
+                                id="email_costumer">
+                            <div class="invalid-feedback"> Please enter a valid email. </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago"
+                                data-shipping="no">Continuar</button>
+                            <div id="paypal-button-container"></div>
+                        </div>
+                  
+            </form>
+            {% else %}
+
             <form class="needs-validation">
-            <div class="col-md-6 mb-2">
-                        <label for="firstName">First name</label>
-                        <input type="text" class="form-control" id="name_costumer" placeholder="your name" required="true">
-                        <div class="invalid-feedback"> A name is required. </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                    <label for="email mb-0">Email </label>
-                    <input type="email" class="form-control" required="true" placeholder="you@example.com" id="email_costumer">
-                    <div class="invalid-feedback"> Please enter a valid email. </div>
-                     <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago" data-shipping="no">Continuar</button>
-                  <div id="paypal-button-container"></div>
-                  </div>
-                    </form>
-            {% else %}
-                <form class="needs-validation">
-            <div class="col-md-6 mb-2">
-            <div id="paypal-button-container"></div>
-            </div>
+                <div class="col-md-6 mb-2">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" id="continuarPago"
+                                data-shipping="no">Continuar</button>
+                    <div id="paypal-button-container"></div>
+                </div>
             </form>
             {% endif %}
             {% endif %}
+
         </div>
     </div>
-    
-</div>
 
 {% endblock content %}
 
