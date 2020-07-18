@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!hq73-$%&7m*56h@%co9)$%$e8a@7z@l8ho4*hvz@1pq4y^cev'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['localhost:5432', '127.0.0.1','localhost']
@@ -157,3 +159,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 LOGIN_REDIRECT_URL = "main"
 
 SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
+
+
+
+
+#added for production
+django_heroku.settings(locals())
