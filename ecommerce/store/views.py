@@ -26,6 +26,7 @@ def login(request):
                 
         except User.DoesNotExist:
             return render(request, "registration/login.html", {"error": "user not found"})
+  
         
         
     else:
