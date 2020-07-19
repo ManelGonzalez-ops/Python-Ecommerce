@@ -159,7 +159,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 MEDIA_URL = "/kaka/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
+MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/images")
 
 # SESSION_COOKIE_SECURE = False
 # CSRF_COOKIE_SECURE = False
