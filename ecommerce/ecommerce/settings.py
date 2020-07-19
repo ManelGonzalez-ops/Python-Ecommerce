@@ -173,3 +173,4 @@ SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #added for production
+django_heroku.settings(locals())
