@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from .models import *
 import json
 from django.contrib.auth import logout
@@ -19,7 +19,7 @@ def login(request):
                 user = auth.authenticate(username=theUser, password=password)
                 if user:
                     auth.login(request, user)
-                    return redirect("main")
+                    return redirect("store")
                 else:
                     print("kaka")
                     return render(request, "registration/login.html", {"error": "Validation error, incorrect password"})
@@ -86,6 +86,8 @@ def toStore(request):
         (orden, created) = Order.objects.get_or_create(costumer=usuario, complete=False)
         carrito = orden.orderitem_set.all()
     else:
+        response = HttpResponse("create cookie")
+        response.set_cookie("cart", {})
         noAuth = True
         carrito = []
 
