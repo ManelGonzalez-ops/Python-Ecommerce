@@ -153,11 +153,11 @@ WHITENOISE_MIMETYPES = {
     '.xsl': 'application/xml'
 }
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static")
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 MEDIA_URL = "/kaka/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 
