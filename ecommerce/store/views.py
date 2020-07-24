@@ -76,6 +76,7 @@ def toMain(request):
     else:
         return render(request, "store/main.html", {"notAuth": True})
 
+
 def toStore(request):
     context = Product.objects.all()
     user = request.user
